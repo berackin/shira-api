@@ -1,4 +1,3 @@
-import json
 from apps import settings
 from apps.products import models
 from apps.utils import decorators, helpers
@@ -40,12 +39,11 @@ def product_detail(request, response, body, id):
 @app.route('/products/<id>', method='PUT')
 @decorators.rest_inject()
 def product_edit(request, response, body, id):
-	models.dummy_product_add()
-	# row = models.product_edit(body, id)
-	# payload = bottils.http.rest_repack(
-	# 	('id', 'name', 'cost', 
-	# 	 'final_price', 'stock', 
-	# 	 'minimum_stock'), row, False)
+	row = models.product_edit(body, id)
+	payload = bottils.http.rest_repack(
+		('id', 'name', 'cost', 
+		 'final_price', 'stock', 
+		 'minimum_stock'), row, False)
 
 	return helpers.rest_render({"ok": True})
 
